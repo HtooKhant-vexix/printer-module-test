@@ -161,6 +161,10 @@ const App = () => {
   const time = convertToHex("10:40 AM");
   const noz = convertToHex("08");
   const vocono = convertToHex("m1/345342534342/20");
+  const basePrice = convertToHex("4500");
+  const liter = convertToHex("10.5");
+  const total = convertToHex("45000");
+  const fuel = convertToHex("005-Premium Diesel(92)");
 
   const sentBtn = async () => {
     try {
@@ -171,7 +175,7 @@ const App = () => {
       await serialPort.send(`1B401B6101${stationName}0A`);
       await serialPort.send(`${location}0A`);
       await serialPort.send(`${location2}0A`);
-      await serialPort.send(`${phone1}${phone2}0A`);
+      await serialPort.send(`${phone1}2C20${phone2}0A`);
       // await serialPort.send("3730322D3736312D373030300A");
       await serialPort.send("1B6100");
       await serialPort.send(
@@ -180,16 +184,24 @@ const App = () => {
       await serialPort.send(`564F434F4E4F202020${vocono}0A`);
       await serialPort.send(`444154452020202020${date}0A`);
       await serialPort.send(`54494D452020202020${time}0A`);
-      await serialPort.send(`50554D502020202020${noz}0A`);
+      await serialPort.send(`4E4F5A5A4C45202020${noz}0A`);
       await serialPort.send(
         "2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D0A"
       );
       // await serialPort.send("44455441494C530A");
-      // await serialPort.send(
-      //   "424153452050524943452020202420322E3937202F2047414C0A"
-      // );
-      // await serialPort.send("47414C4C4F4E532020202033332E313832300A");
-      // await serialPort.send("544F54414C20202020202020242039382E35350A");
+      await serialPort.send(`4655454C20202020${fuel}0A`);
+      await serialPort.send(
+        `4241534520505249434520202020${basePrice}204D4D4B202F204C495445520A`
+      );
+      await serialPort.send(`53414C45204C4954455253202020${liter}204C490A`);
+      await serialPort.send(`544F54414C202020202020202020${total}204D4D4B0A`);
+      await serialPort.send(
+        `202020202020202020202020202028494E434C555349564520544158290A`
+      );
+      // await serialPort.send("0A");
+      await serialPort.send(
+        "2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D2D0A"
+      );
       // await serialPort.send("0A");
       // await serialPort.send("24582039382E353520524547204655454C0A");
       // await serialPort.send("245820342E3433205441580A");
@@ -199,11 +211,11 @@ const App = () => {
       // await serialPort.send("0A");
       // await serialPort.send("245820302E30302042414C414E43450A");
       // await serialPort.send("0A");
-      // await serialPort.send("1B6101");
-      // await serialPort.send("5448414E4B20594F5520464F52205649534954494E470A");
+      await serialPort.send("1B6101");
+      await serialPort.send("5448414E4B20594F5520464F52205649534954494E470A");
       // await serialPort.send("4645454C204445504F540A");
-      // await serialPort.send("1B6402");
-      // await serialPort.send("1D564100");
+      await serialPort.send("1B6401");
+      await serialPort.send("1D564100");
 
       // await serialPort.send(
       //   "1B4048656C6C6F2C20576F726C64210A576F726C640A2D2D2D2D2D2D2D2D2D2D0A"
