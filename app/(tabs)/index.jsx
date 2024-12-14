@@ -59,7 +59,7 @@ const App = () => {
   };
 
   const commandBytes = hexToBytes(fuelInvoice);
-  console.log(commandBytes);
+  // console.log(commandBytes);
 
   const [inputValue, setInputValue] = useState();
   // console.log('====================================');
@@ -89,38 +89,39 @@ const App = () => {
     const setupSerialPort = async () => {
       try {
         console.log("start pro");
-        const serialPort = await SerialPortAPI.open("/dev/ttyS5", {
+        const serialPort = await SerialPortAPI.open("/dev/ttyS8", {
           baudRate: 9600,
         });
 
-        console.log(serialPort);
+        // console.log(serialPort);
         // Check if the serial port is open
         if (serialPort) {
-          console.log("Serial port is open");
+          // console.log("Serial port is open");
           // Subscribe to received data
           const subscription = serialPort.onReceived((buff) => {
             console.log("====================================");
-            console.log(buff);
-            console.log("====================================");
-            console.log("to hex", buff.toString("hex").toUpperCase());
-            console.log(
-              " to text",
-              hexToString(buff.toString("hex").toUpperCase())
-            );
+            console.log(buff.toString("ascii"));
+            console.log("===========u=========================");
+            // console.log(buff.toString("ascii"));
+            // console.log("to hex", buff.toString("hex").toUpperCase());
+            // console.log(
+            //   " to text",
+            //   hexToString(buff.toString("hex").toUpperCase())
+            // );
 
             setChg({
               hex: buff.toString("hex").toUpperCase(),
               text: hexToString(buff.toString("hex").toUpperCase()),
             });
 
-            console.log(subscription);
+            // console.log(subscription);
 
             // Handle the received data as neede
           });
 
           // Remember to close the port and unsubscribe when the component unmounts
           return () => {
-            console.log("port close");
+            // console.log("port close");
             subscription.remove();
             serialPort.close();
           };
@@ -222,7 +223,7 @@ const App = () => {
       // );
       console.log("wk");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -254,7 +255,7 @@ const App = () => {
 
       // console.log(data, "this is");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
